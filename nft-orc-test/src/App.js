@@ -22,22 +22,28 @@ const [accounts, setAccounts] = useState([])
 
 
 
-
-
-
-
-
   return (
     <div className="App">
-      <Router>
-      <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} />
-      <Routes>
-      <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-      <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-      <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-      <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
-      </Routes>
-      </Router>
+
+      {typeof window.ethereum !== 'undefined'?
+            <Router>
+            <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} />
+            <Routes>
+            <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
+            <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
+            <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
+            <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
+            </Routes>
+            </Router>
+
+        :
+        <div>
+          <h1>Please Install MetaMask</h1>
+          <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en' target={"_blank"}>Click Here To Download MetaMask</a>
+        </div>
+    
+    }
+
     </div>
   );
 }
