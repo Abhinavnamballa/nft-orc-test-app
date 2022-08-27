@@ -32,9 +32,10 @@ const [accounts, setAccounts] = useState([])
       <Router>
       <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} />
       <Routes>
+      <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
       <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-      <Route path='/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-      <Route path='/Roadmap' element={<Roadmap/>}></Route>
+      <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
+      <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
       </Routes>
       </Router>
     </div>

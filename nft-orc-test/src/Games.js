@@ -52,7 +52,7 @@ const {orcs, setOrcs, isConnected, accounts, setAccounts} = props
 
             Go To Mint one Now
             <h2 className='go-mint'>
-            <Link to="/">Go Mint</Link>
+            <Link to="/nft-orc-test-app/">Go Mint</Link>
             </h2>
         </div>
     </div>

@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import { ethers } from 'ethers'
 import { ABI } from './ABI'
 import {Link} from 'react-router-dom';
+import gameIcon from './images/game-icon.png'
+import monIcon from './images/mon-icon.png'
 
 function Header(props) {
 
@@ -30,13 +32,13 @@ async function checkOrcs() {
     <div className='Header'>
         <h1 className='title'><Link to="/">Orc Portal</Link></h1>
         <ul className='nav-items'>
-            <li className='menu-item'><Link to="/">Home</Link></li>
-            <li className='menu-item'><Link to="/Games">Games</Link></li>
-            <li className='menu-item'><Link to="/Roadmap">Roadmap</Link></li>
+            <li className='menu-item'><Link to="/nft-orc-test-app/">Home</Link></li>
+            <li className='menu-item'><Link to="/nft-orc-test-app/Games">Games</Link></li>
+            <li className='menu-item'><Link to="/nft-orc-test-app/Roadmap">Roadmap</Link></li>
         </ul>
         <ul className='nav-items'>
-            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src="/mon-icon.png" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : {orcs}</h5></li>
-            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src="/game-icon.png" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : 0</h5></li>
+            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src={monIcon} alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : {orcs}</h5></li>
+            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src={gameIcon} alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : 0</h5></li>
         </ul>
         {orcs > 0 ? 
           (accounts.length > 0? 
