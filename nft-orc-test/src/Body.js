@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import {BigNumber, ethers} from 'ethers';
+import {BigNumber, ethers, utils} from 'ethers';
 import {ABI} from './ABI'
 
 const Body = (props) => {
 
     const [minted, setMinted] = useState([])
-    const {orcs, setOrcs, isConnected, accounts, setAccounts, error, setError} = props
+    const {orcs, setOrcs, isConnected, accounts, setAccounts, error, setError, loading, setLoading} = props
 
     
     const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
@@ -33,32 +33,28 @@ const Body = (props) => {
 
     async function switchNetwork() {
         try {
+            setLoading(true)
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x13881' }],
+              params: [{ chainId: utils.hexValue(80001)}],
             });
-          } catch (switchError) {
+            setLoading(false)
+          } catch {
             // This error code indicates that the chain has not been added to MetaMask.
-            if (switchError.code === 4902) {
-              try {
+            console.log("Catch Happening")
+            setLoading(true)
                 await window.ethereum.request({
                     method: "wallet_addEthereumChain",
                     params: [{
-                        chainId: "0x13881",
-                        rpcUrls: ["https://rpc-mumbai.matic.today"],
-                        chainName: "Mumbai",
-                        nativeCurrency: {
-                            name: "MATIC",
-                            symbol: "MATIC",
-                            decimals: 18
-                        },
+                        chainId: utils.hexValue(80001),
+                        chainName: "Matic(Polygon) Mumbai Testnet",
+                        nativeCurrency: { name: "tMATIC", symbol: "tMATIC", decimals: 18 },
+                        rpcUrls: ["https://rpc-mumbai.maticvigil.com"],
                         blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
                     }],
                 });
-              } catch (addError) {
-                // handle "add" error
-              }
-            }
+                setLoading(false)
+
             // handle other "switch" errors
           }
     }
@@ -88,7 +84,11 @@ const Body = (props) => {
         {error?
         <>
         {error}
-        <button className='mint-btn' onClick={switchNetwork}>Switch Network</button>
+        {loading?
+         <h3>Loading...</h3>
+         :
+         <button className='mint-btn' onClick={switchNetwork} disabled={loading}>Switch Network</button>
+        }
         </> 
         : 
     <>
