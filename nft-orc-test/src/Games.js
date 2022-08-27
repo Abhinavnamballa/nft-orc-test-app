@@ -9,7 +9,7 @@ const {orcs, setOrcs, isConnected, accounts, setAccounts} = props
 
   return (
     <div className='Games'>
-        
+
       {orcs > 0?
 <div className="l-container">
   <div className="b-game-card">
@@ -43,9 +43,13 @@ const {orcs, setOrcs, isConnected, accounts, setAccounts} = props
 </div>
     :
     <div> 
-        You must Own an Orc To access this page. 
+  
 
-        <div>
+        <div className='orc-body'>
+            <h1>
+            You must Own an Orc To access this page. 
+            </h1>
+
             Go To Mint one Now
             <h2 className='go-mint'>
             <Link to="/">Go Mint</Link>

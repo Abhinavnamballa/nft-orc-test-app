@@ -116,3 +116,13 @@ li {
   box-sizing: border-box;
   box-shadow: rgb(4 17 29 / 25%) 0px 0px 12px 0px;
 }
+
+.go-mint {
+  background: rgb(138, 202, 40);
+  border-radius: 20px;
+  padding: 20px;
+}
+.go-mint:hover {
+  background: rgb(175, 250, 62);
+  cursor: pointer;
+}

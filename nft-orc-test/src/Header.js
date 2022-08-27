@@ -46,9 +46,15 @@ async function checkOrcs() {
             :
             "Something went wrong: Refresh Page and try again.")
          :
-         <h3 className='sign-in' onClick={checkOrcs}>Connect Wallet</h3>
-        }
-       
+
+         (accounts.length > 0? 
+            <div>
+               <h3 className='sign-in'>{accounts[0].slice(0,4)}...{accounts[0].slice(35)}</h3>           
+            </div>
+            :
+            <h3 className='sign-in' onClick={checkOrcs}>Connect Wallet</h3>)
+         
+        } 
     </div>
   )
 }
