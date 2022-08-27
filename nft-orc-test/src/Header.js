@@ -15,7 +15,38 @@ const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
 
 
 useEffect(() => {
-    checkOrcs()
+    {
+        // The "any" network will allow spontaneous network changes
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        provider.on("network", (newNetwork, oldNetwork) => {
+            // When a Provider makes its initial connection, it emits a "network"
+            // event with a null oldNetwork along with the newNetwork. So, if the
+            // oldNetwork exists, it represents a changing network
+            if (oldNetwork) {
+                window.location.reload();
+            }
+        });
+    }
+    try {
+        checkOrcs()
+    }
+    catch {
+        window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+                chainId: "0x13881",
+                rpcUrls: ["https://rpc-mumbai.matic.today"],
+                chainName: "Mumbai",
+                nativeCurrency: {
+                    name: "MATIC",
+                    symbol: "MATIC",
+                    decimals: 18
+                },
+                blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+            }]
+        });
+    }
+
 }, [])
 
 
