@@ -19,6 +19,7 @@ const [isConnected, setConnected] = useState(false)
 const [orcs, setOrcs] = useState(0)
 const [supply, setSupply] = useState(0)
 const [accounts, setAccounts] = useState([])
+const [error, setError] = useState("")
 
 
 
@@ -27,11 +28,11 @@ const [accounts, setAccounts] = useState([])
 
       {typeof window.ethereum !== 'undefined'?
             <Router>
-            <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} />
+            <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} />
             <Routes>
-            <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-            <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
-            <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts}/>}></Route>
+            <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError}/>}></Route>
+            <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError}/>}></Route>
+            <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError}/>}></Route>
             <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
             </Routes>
             </Router>

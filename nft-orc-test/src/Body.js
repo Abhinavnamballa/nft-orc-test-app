@@ -5,8 +5,7 @@ import {ABI} from './ABI'
 const Body = (props) => {
 
     const [minted, setMinted] = useState([])
-    const [Error, setError] = useState("")
-    const {orcs, setOrcs, isConnected, accounts, setAccounts} = props
+    const {orcs, setOrcs, isConnected, accounts, setAccounts, error, setError} = props
 
     
     const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
@@ -28,22 +27,40 @@ const Body = (props) => {
             setMinted(parseInt(num._hex))
         }
         catch {
-            window.ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [{
-                    chainId: "0x13881",
-                    rpcUrls: ["https://rpc-mumbai.matic.today"],
-                    chainName: "Mumbai",
-                    nativeCurrency: {
-                        name: "MATIC",
-                        symbol: "MATIC",
-                        decimals: 18
-                    },
-                    blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
-                }]
-            });
             setError("Please connect to the Polygon Mumbai Testnet and Try again.")
         }
+    }
+
+    async function switchNetwork() {
+        try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x13881' }],
+            });
+          } catch (switchError) {
+            // This error code indicates that the chain has not been added to MetaMask.
+            if (switchError.code === 4902) {
+              try {
+                await window.ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [{
+                        chainId: "0x13881",
+                        rpcUrls: ["https://rpc-mumbai.matic.today"],
+                        chainName: "Mumbai",
+                        nativeCurrency: {
+                            name: "MATIC",
+                            symbol: "MATIC",
+                            decimals: 18
+                        },
+                        blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+                    }],
+                });
+              } catch (addError) {
+                // handle "add" error
+              }
+            }
+            // handle other "switch" errors
+          }
     }
 
     async function checkOrcs() {
@@ -68,8 +85,11 @@ const Body = (props) => {
   
     return ( 
      <div className='orc-body'>
-        {Error? 
-        Error
+        {error?
+        <>
+        {error}
+        <button className='mint-btn' onClick={switchNetwork}>Switch Network</button>
+        </> 
         : 
     <>
     <div>

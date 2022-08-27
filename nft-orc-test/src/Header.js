@@ -9,7 +9,7 @@ function Header(props) {
 
 
 
-const {orcs, setOrcs, accounts, setAccounts} = props
+const {orcs, setOrcs, accounts, setAccounts, setError} = props
 
 const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
 
@@ -31,32 +31,25 @@ useEffect(() => {
         checkOrcs()
     }
     catch {
-        window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-                chainId: "0x13881",
-                rpcUrls: ["https://rpc-mumbai.matic.today"],
-                chainName: "Mumbai",
-                nativeCurrency: {
-                    name: "MATIC",
-                    symbol: "MATIC",
-                    decimals: 18
-                },
-                blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
-            }]
-        });
+       setError("Please connect to the Polygon Mumbai Testnet and Try again.")
     }
 
 }, [])
 
 
 async function checkOrcs() {
+  try{
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const numberContract = new ethers.Contract(contractAddress, ABI, provider)
     const accounts = await provider.send("eth_requestAccounts", []);
     setAccounts(accounts)
     const hex = await numberContract.balanceOf(accounts[0])
     setOrcs(parseInt(hex._hex))
+  }
+  catch {
+    setError("Please connect to the Polygon Mumbai Testnet and Try again.")
+  }
+
 }
 
   return (
