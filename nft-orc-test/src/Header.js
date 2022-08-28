@@ -9,7 +9,7 @@ function Header(props) {
 
 
 
-const {orcs, setOrcs, accounts, setAccounts, setError} = props
+const {orcs, accounts,setError, connectWalletHandler} = props
 
 const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
 
@@ -27,30 +27,10 @@ useEffect(() => {
             }
         });
     }
-    try {
-        checkOrcs()
-    }
-    catch {
-       setError("Please connect to the Polygon Mumbai Testnet and Try again.")
-    }
+
 
 }, [])
 
-
-async function checkOrcs() {
-  try{
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const numberContract = new ethers.Contract(contractAddress, ABI, provider)
-    const accounts = await provider.send("eth_requestAccounts", []);
-    setAccounts(accounts)
-    const hex = await numberContract.balanceOf(accounts[0])
-    setOrcs(parseInt(hex._hex))
-  }
-  catch {
-    setError("Please connect to the Polygon Mumbai Testnet and Try again.")
-  }
-
-}
 
   return (
     <div className='Header'>
@@ -67,7 +47,7 @@ async function checkOrcs() {
         {orcs > 0 ? 
           (accounts.length > 0? 
             <div>
-               <h3 className='sign-in'>{accounts[0].slice(0,4)}...{accounts[0].slice(35)}</h3>           
+               <h3 className='sign-in'>{accounts.slice(0,4)}...{accounts.slice(35)}</h3>           
             </div>
             :
             "Something went wrong: Refresh Page and try again.")
@@ -75,10 +55,10 @@ async function checkOrcs() {
 
          (accounts.length > 0? 
             <div>
-               <h3 className='sign-in'>{accounts[0].slice(0,4)}...{accounts[0].slice(35)}</h3>           
+               <h3 className='sign-in'>{accounts.slice(0,4)}...{accounts.slice(35)}</h3>           
             </div>
             :
-            <h3 className='sign-in' onClick={checkOrcs}>Connect Wallet</h3>)
+            <h3 className='sign-in' onClick={connectWalletHandler}>Connect Wallet</h3>)
          
         } 
     </div>
