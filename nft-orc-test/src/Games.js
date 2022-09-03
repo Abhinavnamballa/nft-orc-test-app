@@ -26,13 +26,15 @@ const {orcs, setOrcs, isConnected, accounts, setAccounts} = props
         </div>
     </div>
   </div>
-  <div className="b-game-card">
+  <Link to={'/nft-orc-test-app/Games/GameDisplay'}>
+  <div className="b-game-card" >
     <div className="b-game-card__cover" style={{backgroundImage: "url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_3.jpg)"}}>
     <div className='game-title'>
               <h3>Orc Board</h3>  
         </div>
     </div>
   </div>
+  </Link>
   <div className="b-game-card">
     <div className="b-game-card__cover" style={{backgroundImage: "url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_4.jpg)"}}>
     <div className='game-title'>

@@ -4,6 +4,7 @@ import Body from './Body';
 import Header from './Header';
 import Games from './Games';
 import Roadmap from './Roadmap';
+import Gamedisplay from './Gamedisplay';
 import {useState, useEffect} from 'react';
 import {
   BrowserRouter as Router,
@@ -80,6 +81,7 @@ window.ethereum.on("accountsChanged", connectWalletHandler);
             <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading}/>} connectWalletHandler={connectWalletHandler}></Route>
             <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler}/>}></Route>
             <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading}/>} connectWalletHandler={connectWalletHandler}></Route>
+            <Route path='/nft-orc-test-app/Games/GameDisplay' element={<Gamedisplay orcs={orcs} />}></Route>
             <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
             </Routes>
             </Router>

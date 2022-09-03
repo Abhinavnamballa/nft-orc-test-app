@@ -61,7 +61,7 @@ a:hover {
   color: green;
 }
 
-.orc-body {
+.orc-body, .game-body {
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
@@ -76,6 +76,24 @@ a:hover {
   text-align: center;
   box-sizing: border-box;
   box-shadow: rgb(4 17 29 / 25%) 0px 0px 12px 0px;
+}
+
+
+.game-body {
+  width: 1500px; height: 800px;
+  overflow: hidden;
+  margin-top: 2vh;
+  padding: 0;
+}
+
+.gameIFrame{
+   zoom: 1.75; 
+   -ms-zoom: 1.75;
+   -moz-transform: scale(1.75);
+   -moz-transform-origin: 0 0;
+   -o-transform: scale(0.75);
+   -o-transform-origin: 0 0;
+   -webkit-transform: scale(1.5);
 }
 
 .mint-btn {
