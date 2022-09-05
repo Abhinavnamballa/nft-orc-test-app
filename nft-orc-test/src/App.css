@@ -38,6 +38,10 @@ canvas {
 
 .title {
   margin: 20px;
+  color: #ffa502;
+  text-shadow: 0 0 15px #d35400;
+  font-family: 'copperplate', sans-serif;
+  font-weight: bold;
 }
 
 .title:hover {
