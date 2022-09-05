@@ -69,8 +69,10 @@ const accountChangedHandler = (newAccount) => {
 }
 
 
+if (window.ethereum){
+  window.ethereum.on("accountsChanged", connectWalletHandler);
+}
 
-window.ethereum.on("accountsChanged", connectWalletHandler);
 
   return (
     <div className="App">
