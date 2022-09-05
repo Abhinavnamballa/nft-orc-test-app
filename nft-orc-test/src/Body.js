@@ -84,7 +84,7 @@ const Body = (props) => {
         <h1 style={{fontFamily: "Anton, sans-serif"}}>{minted}/10000 Minted</h1>
         </div>
     
-    <button className="mint-btn-main" onClick={MintOrcNFT}>
+    <button className="mint-btn-main card" onClick={MintOrcNFT}>
         <div className='text'>
         <p>M</p>
         <p>I</p>
