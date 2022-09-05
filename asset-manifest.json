@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/nft-orc-test-app/static/css/main.ed8866ba.css",
-    "main.js": "/nft-orc-test-app/static/js/main.5f033340.js",
+    "main.css": "/nft-orc-test-app/static/css/main.f99bc30f.css",
+    "main.js": "/nft-orc-test-app/static/js/main.f2b259df.js",
     "static/js/787.558e0e50.chunk.js": "/nft-orc-test-app/static/js/787.558e0e50.chunk.js",
     "static/media/game-icon.png": "/nft-orc-test-app/static/media/game-icon.7a610019ba916c10c5ed.png",
     "index.html": "/nft-orc-test-app/index.html",
-    "main.ed8866ba.css.map": "/nft-orc-test-app/static/css/main.ed8866ba.css.map",
-    "main.5f033340.js.map": "/nft-orc-test-app/static/js/main.5f033340.js.map",
+    "main.f99bc30f.css.map": "/nft-orc-test-app/static/css/main.f99bc30f.css.map",
+    "main.f2b259df.js.map": "/nft-orc-test-app/static/js/main.f2b259df.js.map",
     "787.558e0e50.chunk.js.map": "/nft-orc-test-app/static/js/787.558e0e50.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ed8866ba.css",
-    "static/js/main.5f033340.js"
+    "static/css/main.f99bc30f.css",
+    "static/js/main.f2b259df.js"
   ]
 }
