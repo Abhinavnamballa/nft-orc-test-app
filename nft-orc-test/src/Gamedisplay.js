@@ -10,7 +10,7 @@ function Gamedisplay(props) {
 
     {orcs > 0?      
     <div className='game-body'>
-    <iframe src='http://localhost:8000//src/games/game1/MyProject.html' className="gameIFrame"  scrolling ="no" style={{position: "relative", left: "0px", top: "110px", width: "100%", height: "100%"}}></iframe>
+    <iframe src='http://localhost:8000//MyProject.html' className="gameIFrame"  scrolling ="no" style={{position: "relative", left: "0px", top: "110px", width: "100%", height: "100%"}}></iframe>
     </div>
     :
 
