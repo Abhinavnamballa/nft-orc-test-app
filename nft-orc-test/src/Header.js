@@ -34,15 +34,27 @@ useEffect(() => {
 
   return (
     <div className='Header'>
-        <h1 className='title'><Link to="/">Orc Portal</Link></h1>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+<defs>
+<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+</defs>
+<g class="parallax">
+<use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(14, 2, 64,0.7" />
+<use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(14, 2, 64,0.5)" />
+<use xlinkHref="#gentle-wave" x="48" y="5" fill="rgb(14, 2, 64)" />
+<use xlinkHref="#gentle-wave" x="48" y="7" fill="rgb(14, 2, 64)" />
+</g>
+</svg>
+        <h1 className='title'><Link to="/nft-orc-test-app/">Orc Portal</Link></h1>
         <ul className='nav-items'>
             <li className='menu-item'><Link to="/nft-orc-test-app/">Home</Link></li>
             <li className='menu-item'><Link to="/nft-orc-test-app/Games">Games</Link></li>
             <li className='menu-item'><Link to="/nft-orc-test-app/Roadmap">Roadmap</Link></li>
         </ul>
         <ul className='nav-items'>
-            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src={monIcon} alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : {orcs}</h5></li>
-            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center"}}><img src={gameIcon} alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : 0</h5></li>
+            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center", color: "white"}}><img src={monIcon} className="icon-image" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : {orcs}</h5></li>
+            <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center", color: "white"}}><img src={gameIcon} className="icon-image" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : 0</h5></li>
         </ul>
         {orcs > 0 ? 
           (accounts.length > 0? 

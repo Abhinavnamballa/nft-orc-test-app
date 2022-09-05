@@ -64,7 +64,10 @@ const Body = (props) => {
 
 
   
-    return ( 
+    return (
+    <div>
+     <div className='orc-body-2' ></div>
+     <div className='orc-body-3'></div>
      <div className='orc-body'>
         {error?
         <>
@@ -80,12 +83,23 @@ const Body = (props) => {
     <div>
         <h1>{minted}/10000 Minted</h1>
         </div>
-    <button className="mint-btn" onClick={MintOrcNFT}>MINT ORC</button>
+    
+    <button className="mint-btn-main" onClick={MintOrcNFT}>
+        <div className='text'>
+        <p>M</p>
+        <p>I</p>
+        <p>N</p>
+        <p>T O</p>
+        <p>R</p>
+        <p>C</p>
+        </div>     
+        </button>
     </>
 
     
     }
 
+     </div>
      </div>
     )
 }
