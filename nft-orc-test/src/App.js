@@ -79,7 +79,7 @@ if (window.ethereum){
   return (
     <div className="App">
 <Art />
-      {typeof window.ethereum === 'undefined'?
+      {typeof window.ethereum !== 'undefined'?
             <Router>
             <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} />
             <Routes>
