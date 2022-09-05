@@ -1,5 +1,14 @@
 body{
-  background: rgb(255, 255, 255);
+
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  width: 100vw;
+  
 }
 
 .Header {
@@ -59,6 +68,13 @@ a:hover {
 .sign-in:hover {
   cursor: pointer;
   color: green;
+}
+
+#threejs-canvas {
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: 100;
 }
 
 .orc-body, .game-body {
@@ -144,3 +160,4 @@ li {
   background: rgb(175, 250, 62);
   cursor: pointer;
 }
+

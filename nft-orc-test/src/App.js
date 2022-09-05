@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import { ethers } from 'ethers';
 import { ABI } from './ABI';
+import Art from './background/Art';
 
 
 function App() {
@@ -73,7 +74,7 @@ window.ethereum.on("accountsChanged", connectWalletHandler);
 
   return (
     <div className="App">
-
+<Art />
       {typeof window.ethereum !== 'undefined'?
             <Router>
             <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} />
@@ -93,6 +94,9 @@ window.ethereum.on("accountsChanged", connectWalletHandler);
         </div>
     
     }
+
+
+
 
     </div>
   );
