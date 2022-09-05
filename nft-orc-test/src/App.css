@@ -338,6 +338,10 @@ p:nth-child(1n) {
     cursor: pointer;
     font-family: cursive;
   }
+
+  .profile .card::before{
+    border-radius: 100%;
+  }
   
   .card:hover {
     color: rgb(88 199 250 / 100%);
@@ -345,7 +349,7 @@ p:nth-child(1n) {
   }
   
   
-  .card::before {
+  .card::before, #profile::before {
     content: "";
     width: 104%;
     height: 102%;
@@ -358,6 +362,16 @@ p:nth-child(1n) {
       top: -1%;
       left: -2%;
       animation: spin 2.5s linear infinite;
+  }
+
+  #profile::before{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(
+      var(--rotate)
+      , #0b0d69, #030e2c 43%, #000000);
   }
   
   .card::after {
