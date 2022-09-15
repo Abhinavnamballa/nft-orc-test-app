@@ -46,7 +46,9 @@ function Profile(props) {
             }
             let output = {
                 name: tokenMetadata["name"],
-                image: imageURL
+                image: imageURL,
+                id: tokenID,
+                address: contractAddress
             }
             metaArray.push(output)
 
@@ -90,7 +92,7 @@ function Profile(props) {
                 {
                     v3Array.map((nft, i) => {
                         return(
-                            <NFTCard key={i} owned="owned" name={nft.name} image={nft.image}></NFTCard>
+                            <NFTCard key={i} owned="owned" name={nft.name} image={nft.image} id={nft.id} contract={nft.address}></NFTCard>
                         )
                     })
                 }

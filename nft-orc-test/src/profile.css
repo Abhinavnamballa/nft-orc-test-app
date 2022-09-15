@@ -70,6 +70,14 @@
     cursor: pointer;
 }
 
+.nft-link:visited, .nft-link:active, .nft-link {
+  color: white;
+}
+
+.nft-link:hover {
+  color: orange;
+}
+
 .unknown {
     background: rgb(55, 4, 104);
 }
