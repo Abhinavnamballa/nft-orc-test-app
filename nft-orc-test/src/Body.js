@@ -1,28 +1,32 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import {BigNumber, ethers, utils} from 'ethers';
-import {ABI} from './ABI'
+
 
 const Body = (props) => {
 
     const [minted, setMinted] = useState([])
-    const {orcs, setOrcs, isConnected, accounts, error, setError, loading, setLoading} = props
+    const [localError, setLocalError] = useState("")
+    const {error, setError, loading, setLoading, NFTcontract, setNFTContract, contractNum, setContractNum, contractAddress, contractName, orcs} = props
 
-    const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
 
     useEffect(() => {
-
-        callContract()
-    }, [])
+        setLocalError("")
+        if (contractAddress) {
+            callContract()
+        }
+    }, [NFTcontract, orcs])
 
     async function callContract() {
         try {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
-            const numberContract = new ethers.Contract(contractAddress, ABI, provider)
+            const numberContract = new ethers.Contract(contractAddress, NFTcontract, provider)
             const num = await numberContract.totalSupply()
             setMinted(parseInt(num._hex))
         }
-        catch {
-            setError("Please connect to the Polygon Mumbai Testnet and Try again.")
+        catch(e) {
+            setLocalError("Loading Contract Failed.")
+            console.log(e)
+            console.log(contractAddress)
         }
     }
 
@@ -55,11 +59,30 @@ const Body = (props) => {
     }
 
     async function MintOrcNFT() {
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        const accounts = await provider.send("eth_requestAccounts", []);
-        const numberContract = new ethers.Contract(contractAddress, ABI, provider.getSigner())
-        const num = await numberContract.MintOrc(accounts[0])
-        console.log(num)
+        try{
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const accounts = await provider.send("eth_requestAccounts", []);
+            const numberContract = new ethers.Contract(contractAddress, NFTcontract, provider.getSigner())
+            const num = await numberContract.MintOrc(accounts[0])
+            console.log(num)
+        }
+        catch {
+            setLocalError("Failed to initiate Mint")
+        }
+    }
+
+
+    function switchContract() {
+       if (contractNum === 1){
+          console.log(contractNum)
+          setContractNum(0)
+
+       }
+       else {
+        console.log(contractNum)
+        setContractNum(1)
+
+       }
     }
 
 
@@ -81,7 +104,13 @@ const Body = (props) => {
         : 
     <>
     <div>
+        <div className='contract-selector'><div className='left-arrow' onClick={switchContract}></div><h1>{contractName}</h1><div className='right-arrow' onClick={switchContract}></div></div>
+        {localError?
+        <h2>{localError}</h2>
+        :
         <h1 style={{fontFamily: "Anton, sans-serif"}}>{minted}/10000 Minted</h1>
+        }
+
         </div>
     
     <button className="mint-btn-main card" onClick={MintOrcNFT}>

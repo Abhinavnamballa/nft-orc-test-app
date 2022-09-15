@@ -9,7 +9,7 @@ function Header(props) {
 
 
 
-const {orcs, accounts,setError, connectWalletHandler} = props
+const {orcs, accounts,setError, connectWalletHandler, contractName} = props
 
 const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
 
@@ -53,6 +53,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
             <li className='menu-item'><Link to="/nft-orc-test-app/Roadmap">Roadmap</Link></li>
         </ul>
         <ul className='nav-items'>
+            <li className='menu-item'>{contractName}</li>
             <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center", color: "white"}}><img src={monIcon} className="icon-image" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : {orcs}</h5></li>
             <li className='menu-item' style={{display: "flex", justifyContent: "center", alignItems: "center", color: "white"}}><img src={gameIcon} className="icon-image" alt="image" width="20px" style={{marginRight: "5px"}}/> <h5> : 0</h5></li>
         </ul>

@@ -393,7 +393,100 @@ p:nth-child(1n) {
     transition: opacity .5s;
     animation: spin 2.5s linear infinite;
   }
-  
+
+  .contract-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+
+
+  .left-arrow::before { 
+    content: " ";
+    border-left: 4px solid rgb(255, 255, 255);
+    border-bottom: 4px solid rgb(255, 255, 255);
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    display: block;
+    margin-top: 25px;
+    margin-right: 5em;
+  }
+
+  .right-arrow::before {
+    content: " ";
+    border-right: 4px solid rgb(255, 255, 255);
+    border-top: 4px solid rgb(255, 255, 255);
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    display: block;
+    margin-top: 25px;
+    margin-left: 5em;
+  }
+
+  .right-arrow:hover {
+    translate: 10px;
+  }
+
+  .left-arrow:hover {
+    translate: -10px;
+  }
+
+  .nft-picture {
+    width: 100%;
+    height: 100%;
+  }
+
+  .minted-modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    top: 10vw;
+    left: 20vw;
+    width: 50%;
+    padding-top: 1vh;
+    padding-bottom: 4vh;
+    z-index: 9999;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: rgb(4 17 29 / 25%) 0px 0px 12px 0px;
+    animation: bondJamesBond 1.5s forwards; 
+  }
+
+  .modal-image-container {
+    width: 100%;
+    margin-left: 30%;
+    animation: bondJamesBond 3.5s forwards; 
+  }
+  .modal-title-container {
+    width: 100%;
+    margin-left: 70%;
+    animation: bondJamesBond 2.5s forwards; 
+  }
+
+  .close-modal-btn {
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    background: black;
+    animation: killShot 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .close-modal-btn:hover {
+    color: black;
+    background: white;
+  }
+
   @keyframes spin {
     0% {
       --rotate: 0deg;
@@ -402,6 +495,63 @@ p:nth-child(1n) {
       --rotate: 360deg;
     }
   }
+
+
+
+
+  @keyframes bondJamesBond {
+    0% {
+      transform:translateX(-40vw);
+      scale: .34;
+      opacity: .3;
+      width: 0px;
+    }
+    80% {
+      border-radius:50%;
+      width: 0px;
+    }
+    90% {
+    }
+    100% {
+
+    }
+  }
   
+  @keyframes killShot {
+
+    0% {
+      opacity:0;
+    }
+    50% {
+      transform:translateY(300px) rotate(45deg);
+      opacity:.7;
+    }
+    100% {
+      transform:translateY(0) rotate(0deg);
+      opacity:1;
+    }
+  }
+  
+  @keyframes fadeToRed {
+    0% {
+      background-color:rgba(black,.6);
+    }
+    100% {
+      background-color:rgba(red,.8);
+    }
+  }
+  
+  @keyframes slowFade {
+    0% {
+      opacity:1;
+    }
+    99.9% {
+      opacity:0;
+      transform:scale(1);
+    }
+    100% {
+      transform:scale(0);
+    }
+  }
 
 

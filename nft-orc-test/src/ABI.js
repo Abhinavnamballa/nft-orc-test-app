@@ -1,4 +1,4 @@
-export const ABI = [
+export const Orcsv2 = [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -393,3 +393,7 @@ export const ABI = [
       "type": "function"
     }
   ]
+
+  export const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
+
+  export const contractName = 'Orcs v2'

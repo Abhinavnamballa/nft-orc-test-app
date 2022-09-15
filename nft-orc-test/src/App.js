@@ -6,6 +6,7 @@ import Games from './Games';
 import Roadmap from './Roadmap';
 import Gamedisplay from './Gamedisplay';
 import Profile from './Profile';
+import MintedModal from './MintedModal';
 import {useState, useEffect} from 'react';
 import {
   BrowserRouter as Router,
@@ -14,7 +15,7 @@ import {
   Link
 } from "react-router-dom";
 import { ethers } from 'ethers';
-import { ABI } from './ABI';
+import { Orcsv2 } from './ABI';
 import Art from './background/Art';
 import MetaIcon from './images/MetaMask.png'
 import MetaImage from './images/MetamaskDoc.PNG'
@@ -28,14 +29,30 @@ const [supply, setSupply] = useState(0)
 const [accounts, setAccounts] = useState("")
 const [error, setError] = useState("")
 const [loading, setLoading] = useState(false)
+const [NFTcontract, setNFTContract] = useState("")
+const [contractAddress, setContractAddress] = useState("")
+const [contractNum, setContractNum] = useState(0)
+const [contractName, setContractName] = useState("")
+const [mintedName, setMintedName] = useState("")
+const [mintedURL, setMintedURL] = useState("")
+
+var ABI = Orcsv2
 
 
 useEffect(() => {
+if(window.ethereum) {
+  pickContract()
+}
+}, [contractNum]);
 
-}, []);
+useEffect(() => {
+  if (window.ethereum && accounts){
+    checkOrcs(accounts)
+  }
+}, [contractAddress]);
 
 
-const contractAddress = '0xb62C298B0173E7A0b5EEA9FCAa1f72227AF86bd9'
+
 
 const connectWalletHandler = () => {
   if (window.ethereum) {
@@ -49,19 +66,49 @@ const connectWalletHandler = () => {
   }
 }
 
-const getUserBalance = (address) => {
-    window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
-    .then(balance => {
-      console.log(balance)
-    })
+async function pickContract(){
+  switch(contractNum){
+    case 0:
+       await import("./ABI").then(contract => {
+            setNFTContract(contract.Orcsv2)
+            setContractAddress(contract.contractAddress)
+            setContractName(contract.contractName)
+        })
+        break;
+    case 1:
+        await import("./ABI2").then(contract => {
+          setNFTContract(contract.Orcsv3)
+          setContractAddress(contract.contractAddress)
+          setContractName(contract.contractName)
+          console.log(contract.contractAddress)
+        })
+        break;
+    default:
+        await import("./ABI").then(contract => {
+            setNFTContract(contract.Orcsv2)
+            setContractAddress(contract.contractAddress)
+            setContractName(contract.contractName)
+        })
+        break;
+}
+
 }
 
 async function checkOrcs(accountInput) {
-  console.log(accountInput)
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-  const numberContract = new ethers.Contract(contractAddress, ABI, provider)
-  const hex = await numberContract.balanceOf(accountInput)
-  setOrcs(parseInt(hex._hex))
+  try {
+    console.log(accountInput)
+    console.log(contractAddress)
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const numberContract = new ethers.Contract(contractAddress, NFTcontract, provider)
+    const hex = await numberContract.balanceOf(accountInput)
+    setOrcs(parseInt(hex._hex))
+  }
+  catch {
+    console.log("Error checking Orcs")
+    console.log(contractAddress)
+    setOrcs(0)
+  }
+
 }
 
 const accountChangedHandler = (newAccount) => {
@@ -70,23 +117,80 @@ const accountChangedHandler = (newAccount) => {
   setAccounts(newAccount)
 }
 
+const listenToMint = () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  let contract = new ethers.Contract(contractAddress, NFTcontract, provider)
+  contract.on("mintFinished", async (holder_address, ID) => {
+    let info = {
+      holder_address: holder_address,
+      ID: ID
+    }
+    if (accounts && mintedName === ""){
+      if (accounts.toLowerCase() == info.holder_address.toLowerCase()){
+        let tokenMetadataURI = await contract.tokenURI(ID)
+        if (tokenMetadataURI.startsWith("ipfs://")){
+          tokenMetadataURI = `https://ipfs.io/ipfs/${tokenMetadataURI.split("ipfs://")[1]}`
+      }
+      let tokenMetadata = await fetch(tokenMetadataURI).then((response) => {
+        return response.json()
+      })
+      let imageURL
+      if (tokenMetadata["image"].startsWith("ipfs://")){
+          imageURL = `https://ipfs.io/ipfs/${tokenMetadata["image"].split("ipfs://")[1]}`
+      }
+      else {
+          imageURL = ""
+      }
+      setMintedName(tokenMetadata["name"])
+      setMintedURL(imageURL)
+      checkOrcs(accounts)
+      }
+    }
+    console.log(JSON.stringify(info, null, 4))
+    console.log(accounts, info.holder_address)
+  })
+}
+
+const closeModal = () => {
+  setMintedName("")
+  setMintedURL("")
+}
+
 
 if (window.ethereum){
   window.ethereum.on("accountsChanged", connectWalletHandler);
 }
 
 
+if (window.ethereum && mintedName === ""){
+  try {
+    listenToMint()
+  }
+  catch(e) {
+    console.log(e)
+  }
+
+}
+
   return (
     <div className="App">
+      {/*<MintedModal name={"Blue Orc"} image={"https://ipfs.io/ipfs/QmRPPuN31QLZ8PgxEauENd5KQwibbEauNP3FeiPyiwCneH/OrcBlue.png"} close={closeModal}/> */}
+      {
+        mintedName? 
+        <MintedModal name={mintedName} image={mintedURL} close={closeModal}/>
+        :
+        null
+      }
+
 <Art />
       {typeof window.ethereum !== 'undefined'?
             <Router>
-            <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} />
+            <Header orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} NFTcontract={NFTcontract} setNFTContract={setNFTContract} contractNum={contractNum} setContractNum={setContractNum} contractName={contractName} />
             <Routes>
-            <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler}/>} ></Route>
-            <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler}/>}></Route>
+            <Route path='/nft-orc-test-app/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} NFTcontract={NFTcontract} setNFTContract={setNFTContract} contractNum={contractNum} setContractNum={setContractNum} contractAddress={contractAddress} contractName={contractName} /> } ></Route>
+            <Route path='/' element={<Body orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} connectWalletHandler={connectWalletHandler} NFTcontract={NFTcontract} setNFTContract={setNFTContract} contractNum={contractNum} setContractNum={setContractNum} contractAddress={contractAddress} contractName={contractName} /> }></Route>
             <Route path='/nft-orc-test-app/Games' element={<Games orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading}/>} connectWalletHandler={connectWalletHandler}></Route>
-            <Route path='/nft-orc-test-app/Profile' element={<Profile orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading}/>} > </Route>
+            <Route path='/nft-orc-test-app/Profile' element={<Profile orcs={orcs} setOrcs={setOrcs} isConnected={isConnected} setConnected={setConnected} accounts={accounts} setAccounts={setAccounts} error={error} setError={setError} loading={loading} setLoading={setLoading} NFTcontract={NFTcontract} contractAddress={contractAddress} contractName={contractName} />} > </Route>
             <Route path='/nft-orc-test-app/Games/GameDisplay' element={<Gamedisplay orcs={orcs} />}></Route>
             <Route path='/nft-orc-test-app/Roadmap' element={<Roadmap/>}></Route>
             </Routes>
