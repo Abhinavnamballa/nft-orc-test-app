@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/nft-orc-test-app/static/css/main.b800650e.css",
-    "main.js": "/nft-orc-test-app/static/js/main.233b2842.js",
+    "main.css": "/nft-orc-test-app/static/css/main.3cb8766f.css",
+    "main.js": "/nft-orc-test-app/static/js/main.6cbe086b.js",
     "static/js/787.558e0e50.chunk.js": "/nft-orc-test-app/static/js/787.558e0e50.chunk.js",
     "static/media/MetaMask.png": "/nft-orc-test-app/static/media/MetaMask.f09b3822877b112b4331.png",
     "static/media/game-icon.png": "/nft-orc-test-app/static/media/game-icon.7a610019ba916c10c5ed.png",
     "static/media/MetamaskDoc.PNG": "/nft-orc-test-app/static/media/MetamaskDoc.3d7864d1e1432c43beee.PNG",
     "index.html": "/nft-orc-test-app/index.html",
-    "main.b800650e.css.map": "/nft-orc-test-app/static/css/main.b800650e.css.map",
-    "main.233b2842.js.map": "/nft-orc-test-app/static/js/main.233b2842.js.map",
+    "main.3cb8766f.css.map": "/nft-orc-test-app/static/css/main.3cb8766f.css.map",
+    "main.6cbe086b.js.map": "/nft-orc-test-app/static/js/main.6cbe086b.js.map",
     "787.558e0e50.chunk.js.map": "/nft-orc-test-app/static/js/787.558e0e50.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b800650e.css",
-    "static/js/main.233b2842.js"
+    "static/css/main.3cb8766f.css",
+    "static/js/main.6cbe086b.js"
   ]
 }
