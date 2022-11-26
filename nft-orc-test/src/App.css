@@ -37,6 +37,7 @@ canvas {
 }
 
 .title {
+  display: flex;
   margin: 20px;
   color: white;
   text-shadow: 0 0 15px #ffffff;
@@ -485,6 +486,12 @@ p:nth-child(1n) {
   .close-modal-btn:hover {
     color: black;
     background: white;
+  }
+
+  .version {
+    font-size: 9px;
+    margin: 5px;
+    margin-top: 21px;
   }
 
   @keyframes spin {

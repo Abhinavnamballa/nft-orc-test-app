@@ -46,11 +46,11 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
 <use xlinkHref="#gentle-wave" x="48" y="7" fill="rgb(14, 2, 64)" />
 </g>
 </svg>
-            <Link to="/nft-orc-test-app/"><h1 className='title'>Orc Portal</h1></Link>
+            <Link to="/nft-orc-test-app/"><h1 className='title'>Orc Portal<h6 className='version'>v0.1.2</h6></h1></Link>
         <ul className='nav-items'>
             <li className='menu-item'><Link to="/nft-orc-test-app/">Home</Link></li>
             <li className='menu-item'><Link to="/nft-orc-test-app/Games">Games</Link></li>
-            <li className='menu-item'><Link to="/nft-orc-test-app/Roadmap">Roadmap</Link></li>
+            <li className='menu-item'><Link to="/nft-orc-test-app/Roadmap">Sandbox</Link></li>
         </ul>
         <ul className='nav-items'>
             <li className='menu-item'>{contractName}</li>

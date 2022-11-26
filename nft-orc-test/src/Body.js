@@ -25,6 +25,7 @@ const Body = (props) => {
         }
         catch(e) {
             setLocalError("Loading Contract Failed.")
+            setError("Contract Failed to Load: Please Switch to Polygon Mumbai TestNet to Load Contracts")
             console.log(e)
             console.log(contractAddress)
         }
