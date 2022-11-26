@@ -21,15 +21,8 @@ function Roadmap() {
 
   return (
     <div className='Roadmap'>
-        <h1>Future Improvements</h1>
-
-        <ul>
-            <li> - Random number via Chainlink</li>
-            <li> - Redux for better State Management</li>
-            <li> - Backend powered my Moralis</li>
-            <li> - Event Emitter on Smart Contract</li>
-            <li> - Test Cases/Performance Logging</li>
-        </ul>
+      <input type="text" style={{padding: '20px', marginTop:'50px'}} placeholder="Enter Your Input"></input>
+      <button className='mint-btn'>Test Contract</button>
     </div>
   )
 }
